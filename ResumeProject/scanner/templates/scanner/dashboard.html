@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+
+        .table th {
+            background-color: #4facfe;
+            color: white;
+        }
+
+        .badge-success {
+            background-color: green;
+        }
+
+        .badge-danger {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">📊 Candidate Dashboard</h2>
+
+    <div class="text-end mb-3">
+        <a href="/clear/" class="btn btn-danger">Clear Data</a>
+    </div>
+
+    <table class="table table-hover shadow">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Skills</th>
+                <th>Score (%)</th>
+                <th>Prediction</th>
+                <th>Confidence</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for c in candidates %}
+            <tr>
+                <td>{{ c.name }}</td>
+                <td>{{ c.skills }}</td>
+                <td><b>{{ c.score }}%</b></td>
+
+                <td>
+                    {% if c.prediction == "Selected" %}
+                        <span class="badge bg-success">Selected</span>
+                    {% else %}
+                        <span class="badge bg-danger">Rejected</span>
+                    {% endif %}
+                </td>
+
+                <td>{{ c.probability }}%</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
